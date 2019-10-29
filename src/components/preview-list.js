@@ -7,6 +7,8 @@ function PreviewList(props) {
   
   // Hide 'Load More' if all loaded
   if (props.showLoad) {
+    console.log('show')
+    console.log(props.showLoad)
     return(
       <React.Fragment>
         <S.CardsContainer>
@@ -18,6 +20,8 @@ function PreviewList(props) {
       </React.Fragment>
     )
   } else {
+    console.log('dont show')
+    console.log(props.showLoad)
     return(
       <React.Fragment>
       <S.CardsContainer>
@@ -54,6 +58,7 @@ S.CardsContainer = styled.div`
 S.LoadButton = styled.button`
   flex: 1;
   width: 100%;
+  min-height: 30px;
   color: white;
   text-decoration: none;
   border: none;

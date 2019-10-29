@@ -106,7 +106,7 @@ export class App extends Component {
           <S.Title>Pokedex</S.Title>
           <S.CardContaiter>
             <S.PreviewListContainer>
-              <PreviewList types={TYPE_COLORS}select={this.selectPokemon} pokemons={this.state.pokemons} loadMore={this.fetchPokemons}/>
+              <PreviewList types={TYPE_COLORS} select={this.selectPokemon} pokemons={this.state.pokemons} loadMore={this.fetchPokemons} showLoad={this.state.url}/>
             </S.PreviewListContainer >
             <S.DetailedCardContainer width={MEDIA_WIDTH}>
              <DetailedCard deselect={this.deselect} pokemon={this.state.selected} />
