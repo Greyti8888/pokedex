@@ -100,6 +100,7 @@ export class App extends Component {
   }
 
   render() {
+    // Hide delailed card if nothing selected
     if(this.state.selected) {
       return (
         <S.Container onClick={this.deselect}>

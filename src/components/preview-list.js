@@ -5,10 +5,8 @@ import PreviewCards from './preview-list/preview-cards'
 
 function PreviewList(props) {
   
-  // Hide 'Load More' if all loaded
+  // Hide 'Load More' if all pokemons loaded
   if (props.showLoad) {
-    console.log('show')
-    console.log(props.showLoad)
     return(
       <React.Fragment>
         <S.CardsContainer>
@@ -20,8 +18,6 @@ function PreviewList(props) {
       </React.Fragment>
     )
   } else {
-    console.log('dont show')
-    console.log(props.showLoad)
     return(
       <React.Fragment>
       <S.CardsContainer>

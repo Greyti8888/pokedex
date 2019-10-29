@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 function DetailedCard(props) {
-  // Hide if nothing selected
-  if(!props.pokemon) return null
 
   let id = props.pokemon['id'].toString()
   while (id.length < 3) id = '0' + id
