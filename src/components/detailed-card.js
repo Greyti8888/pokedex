@@ -11,6 +11,7 @@ function DetailedCard(props) {
 
   return (
     <S.Card>
+      <S.CloseButton id='closeBtn' show={props.show}>X</S.CloseButton>
       <S.Img src={props.pokemon.img} alt={props.pokemon['Name']} />
       <S.Title>{title}</S.Title>
       <S.Table>
@@ -65,11 +66,20 @@ S.Card = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 610px;
-  width: 200px;
   padding: 0 10px 10px 10px;
   border: solid;
   background-color: lightgrey;
+`
+
+S.CloseButton = styled.button`
+  display: ${props => props.show ? 'block' : 'none'};
+  color: white;
+  text-decoration: none;
+  align-self: flex-end;
+  width: 25px;
+  height: 25px;
+  border: none;
+  background-color: red
 `
 
 S.Img = styled.img`
@@ -83,6 +93,7 @@ S.Title = styled.h2`
 `
 
 S.Table = styled.table`
+  width: 200px;
   border-collapse: collapse;
   text-align: center;
 `

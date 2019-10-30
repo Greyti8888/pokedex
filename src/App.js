@@ -40,7 +40,15 @@ export class App extends Component {
 
   componentDidMount() {
     this.fetchPokemons()
+    // Preventing 100vh problem on mobile browsers
+    this.height = window.innerHeight
+    window.addEventListener('resize', this.adjustHeight )
   }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.adjustHeight)
+  }
+
+  adjustHeight = () => this.height = window.innerHeight
 
   fetchPokemons = () => {
     fetch(this.state.url)
@@ -93,31 +101,32 @@ export class App extends Component {
     })
   }
 
-  // For small resolution
   deselect = (e) => {
-    if (e.currentTarget.offsetWidth > MEDIA_WIDTH) return
-    this.setState({selected: false})
+    // Close detailed card by clicking 'X' or by clicking anywhere if window width < MEDIA_WIDTH
+    if (e.target.id === 'closeBtn' || e.currentTarget.offsetWidth < MEDIA_WIDTH) {
+      this.setState({selected: false})
+    } else return
   }
 
   render() {
     // Hide delailed card if nothing selected
     if(this.state.selected) {
       return (
-        <S.Container onClick={this.deselect}>
+        <S.Container onClick={this.deselect} height={this.height}>
           <S.Title>Pokedex</S.Title>
           <S.CardContaiter>
             <S.PreviewListContainer>
               <PreviewList types={TYPE_COLORS} select={this.selectPokemon} pokemons={this.state.pokemons} loadMore={this.fetchPokemons} showLoad={this.state.url}/>
             </S.PreviewListContainer >
-            <S.DetailedCardContainer width={MEDIA_WIDTH}>
-             <DetailedCard deselect={this.deselect} pokemon={this.state.selected} />
+            <S.DetailedCardContainer width={MEDIA_WIDTH} height={this.height}>
+             <DetailedCard deselect={this.deselect} pokemon={this.state.selected} show={MEDIA_WIDTH < window.innerWidth ? true : false}/>
             </S.DetailedCardContainer>
           </S.CardContaiter>
         </S.Container>
       )
     } else {
       return (
-        <S.Container>
+        <S.Container height={this.height}>
           <S.Title>Pokedex</S.Title>
           <S.CardContaiter>
             <S.PreviewListContainer>
@@ -141,6 +150,7 @@ S.Container = styled.div `
   font-size: 14px;
   padding: 10px;
   height: 100vh;
+  height: ${props => props.height}px;
   background-color: grey;
 `
 
@@ -182,6 +192,7 @@ S.DetailedCardContainer = styled.div`
     top: 0;
     width: 100%;
     height: 100%;
+    height: ${props => props.height}px;
     background-color: rgba(128, 128, 128, 0.8);
   }
 `
