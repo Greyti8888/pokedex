@@ -62,6 +62,7 @@ function DetailedCard(props) {
 const S = {}
 
 S.Card = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,9 +74,11 @@ S.Card = styled.div`
 
 S.CloseButton = styled.button`
   display: ${props => props.show ? 'block' : 'none'};
+  position: absolute;
+  top: 0;
+  right: 0;
   color: white;
   text-decoration: none;
-  align-self: flex-end;
   width: 25px;
   height: 25px;
   border: none;
